@@ -29,5 +29,26 @@ function deleteByID($id){
     $conexao = null;
 }
 
+function alterarById(array $array){
+        $dados = $array;
+        $conexao = novaConexaoPDO();
+        $sql = 'UPDATE cadastro SET nome = ?, nascimento = ?, email = ?, site = ?, filhos = ?, salario = ? WHERE id = ?';
+        $stmt = $conexao->prepare($sql);
+        $resultado = $stmt->execute([
+            $dados['nome'],
+            $dados['nascimento'],
+            $dados['email'],
+            $dados['site'],
+            $dados['filhos'],
+            $dados['salario'],
+            $dados['id']
+        ]);
+        if($resultado){
+            echo "<br>Alterado!<br>";
+        }
+        $conexao= null;
+        $stmt = null;
+}
+
 
 ?>
